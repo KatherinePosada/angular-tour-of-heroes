@@ -6,13 +6,15 @@ import { Hero } from './hero';
 import { HeroDetailsComponent } from '../hero-details/hero-details.component';
 import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
   standalone: true,
   imports: [
     NgFor,
-    HeroDetailsComponent
+    HeroDetailsComponent,
+    RouterModule
   ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css'
