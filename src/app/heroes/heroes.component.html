@@ -1,16 +1,35 @@
 <h2>My heroes</h2>
-<ul class="heroes">
+<!-- <ul class="heroes">
   <li *ngFor="let hero of heroes">
-    <!-- <button type="button" (click)="onSelect(hero)">
+    <button type="button" (click)="onSelect(hero)">
       <span class="badge"> {{hero.id}} </span>
       <span class="name"> {{hero.name}} </span>
     </button> -->
 
-    <a routerLink="/details/{{hero.id}}">
+    <!-- <a routerLink="/details/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a>
-
-  </li>
-</ul>
+   </li>
+</ul> -->
+<table class="styled-table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Alias</th>
+      <th>Power ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of heroes">
+      <td>{{ hero.id }}</td>
+      <td><a routerLink="/details/{{hero.id}}">
+        {{hero.name}}
+      </a></td>
+      <td>{{ hero.alias }}</td>
+      <td>{{ hero.power }}</td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- <app-hero-details [hero]="selectedHero"></app-hero-details> -->
