@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MessageService } from './message.service';
 import { Observable, catchError, of, tap } from 'rxjs';
-import { Power } from './powers/power';
+
+import { MessageService } from '../message.service';
+import { Power } from '../powers/power';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +49,7 @@ export class PowerService {
     .pipe(
       tap(_ => this.log('fetched powers')),
       catchError(this.handleError<Power[]>('getPowers', []))
-    )
+    );
   }
 
   getPower(id: number): Observable<Power>{

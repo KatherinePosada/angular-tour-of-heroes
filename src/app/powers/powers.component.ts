@@ -1,9 +1,10 @@
 import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 import { Power } from './power';
-import { PowerService } from '../power.service';
 import { MessageService } from '../message.service';
+import { PowerService } from '../heroes/power.service';
 
 @Component({
   selector: 'app-powers',
