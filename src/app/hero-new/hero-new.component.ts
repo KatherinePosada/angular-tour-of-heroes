@@ -1,31 +1,28 @@
 import { Component } from '@angular/core';
-import { Location, NgFor, NgIf, UpperCasePipe } from '@angular/common';
-import { FormControl, FormGroup, FormsModule, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Location, NgFor } from '@angular/common';
 
 import { Hero } from '../heroes/hero';
-import { HeroService } from '../heroes/hero.service';
+import { HeroNew, HeroService } from '../heroes/hero.service';
 import { PowerService } from '../heroes/power.service';
 import { Power } from '../powers/power';
 
 @Component({
-  selector: 'app-hero-details',
+  selector: 'app-hero-new',
   standalone: true,
   imports: [
-    NgIf,
-    NgFor,
-    UpperCasePipe,
     FormsModule,
     ReactiveFormsModule,
+    NgFor,
   ],
-  templateUrl: './hero-details.component.html',
-  styleUrl: './hero-details.component.css'
+  templateUrl: './hero-new.component.html',
+  styleUrl: './hero-new.component.css'
 })
-export class HeroDetailsComponent {
-  hero?: Hero;
+export class HeroNewComponent {
   powers: Power[] = [];
-  //Reactive form:
-  heroForm = new FormGroup({
+
+  newHeroForm = new FormGroup({
     name: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
@@ -47,18 +44,7 @@ export class HeroDetailsComponent {
   ){}
 
   ngOnInit(): void{
-    this.getHero();
     this.getPowersService();
-  }
-
-  getHero(): void{
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-
-    this.heroService.getHero(id)
-      .subscribe(hero => {
-        this.hero = hero;
-        this.heroForm.patchValue(hero);
-      });
   }
 
   getPowersService(): void{
@@ -73,15 +59,11 @@ export class HeroDetailsComponent {
   }
 
   onSubmit(): void {
-    if (this.heroForm.valid && !this.heroForm.pristine) {
-      const hero = {
-        id: this.hero?.id,
-        ...this.heroForm.value
-      } as Hero;
+    if (this.newHeroForm.valid && !this.newHeroForm.pristine) {
+      const hero = this.newHeroForm.value as HeroNew;
 
-      this.heroService.updateHero(hero)
+      this.heroService.createHero(hero)
         .subscribe(() => this.goBack());
     }
   }
-
 }

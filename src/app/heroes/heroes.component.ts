@@ -4,9 +4,9 @@ import { NgFor } from '@angular/common';
 
 import { Hero } from './hero';
 import { HeroDetailsComponent } from '../hero-details/hero-details.component';
-import { HeroService } from '../hero.service';
 import { MessageService } from '../message.service';
 import { RouterModule } from '@angular/router';
+import { HeroService } from './hero.service';
 
 @Component({
   selector: 'app-heroes',
